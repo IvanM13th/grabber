@@ -21,11 +21,6 @@ public class HabrCareerParse implements Parse {
         this.dateTimeParser = dateTimeParser;
     }
 
-    public static void main(String[] args) throws IOException {
-        HabrCareerParse hcp = new HabrCareerParse(new HabrCareeDateTimeParser());
-        hcp.list(PAGE_LINK);
-    }
-
     private String retrieveDescription(String link) {
         String text;
         try {
