@@ -6,7 +6,6 @@ import org.quartz.impl.StdSchedulerFactory;
 import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.Properties;
 
 import static org.quartz.JobBuilder.*;
@@ -72,11 +71,11 @@ public class AlertRabbit {
         @Override
         public void execute(JobExecutionContext context) {
             System.out.println("Rabbit runs here ...");
-            try (Connection connection = (Connection) context.getJobDetail().getJobDataMap().get("connection")) {
-                try (PreparedStatement st = connection.prepareStatement("insert into rabbit(created_date) values(?)")) {
-                    st.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
-                    st.execute();
-                }
+            Connection connection = (Connection) context.getJobDetail()
+                    .getJobDataMap().get("connection");
+            try (PreparedStatement st = connection.prepareStatement("insert into rabbit(created_date) values(?)")) {
+                st.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+                st.execute();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
