@@ -84,7 +84,6 @@ public class PsqlStore implements Store {
                     post = setValues(set);
                 }
             }
-            statement.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
