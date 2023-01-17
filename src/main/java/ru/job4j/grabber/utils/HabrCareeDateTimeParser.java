@@ -5,8 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 public class HabrCareeDateTimeParser implements DateTimeParser {
 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+
     @Override
     public LocalDateTime parse(String parse) {
-        return LocalDateTime.parse(parse, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        return LocalDateTime.parse(parse, formatter);
     }
 }

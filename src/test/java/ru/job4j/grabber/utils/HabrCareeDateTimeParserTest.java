@@ -17,4 +17,3 @@ public class HabrCareeDateTimeParserTest {
         assertThat(time).isEqualTo(LocalDateTime.parse(dateText, DateTimeFormatter.ISO_OFFSET_DATE_TIME));
     }
 }
-
