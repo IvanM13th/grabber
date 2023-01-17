@@ -1,8 +1,7 @@
 package ru.job4j.grabber;
 
-import org.jsoup.Jsoup;
-
 import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -30,11 +29,15 @@ public class HabrCareerParse {
         }
     }
 
-    private String retrieveDescription(String link) throws IOException {
-        return Jsoup.connect(link).get()
-                .select(".vacancy-description__text")
-                .first()
-                .child(0)
-                .text();
+    private String retrieveDescription(String link) {
+        String text;
+        try {
+            text = Jsoup.connect(link).get()
+                    .select(".style-ugc")
+                    .text();
+        } catch (IOException e) {
+            throw new IllegalArgumentException();
+        }
+        return text;
     }
 }
