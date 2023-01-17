@@ -28,6 +28,13 @@ public class HabrCareerParse {
                 System.out.printf("%s %s %s%n", vacancyDate, vacancyName, link);
             });
         }
+    }
 
+    private String retrieveDescription(String link) throws IOException {
+        return Jsoup.connect(link).get()
+                .select(".vacancy-description__text")
+                .first()
+                .child(0)
+                .text();
     }
 }
