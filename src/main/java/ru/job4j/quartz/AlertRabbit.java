@@ -39,11 +39,6 @@ public class AlertRabbit {
             } catch (Exception se) {
                 se.printStackTrace();
             }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
