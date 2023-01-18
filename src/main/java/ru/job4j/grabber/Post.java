@@ -10,10 +10,10 @@ public class Post {
     private String description;
     private LocalDateTime created;
 
-    public Post(int id, String title, String description, String link,  LocalDateTime created) {
+    public Post(int id, String description, String title,  String link,  LocalDateTime created) {
         this.id = id;
-        this.link = link;
         this.title = title;
+        this.link = link;
         this.description = description;
         this.created = created;
     }
