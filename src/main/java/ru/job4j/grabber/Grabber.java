@@ -18,8 +18,8 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 public class Grabber implements Grab {
-    private final Properties cfg = new Properties();
     private static final String LINK = "https://career.habr.com/vacancies/java_developer";
+    private final Properties cfg = new Properties();
 
     public Store store() throws SQLException {
         return new PsqlStore(cfg);
