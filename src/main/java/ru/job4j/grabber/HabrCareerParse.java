@@ -42,7 +42,7 @@ public class HabrCareerParse implements Parse {
                 Document document = connection.get();
                 Elements rows = document.select(".vacancy-card__inner");
                 rows.forEach(row -> {
-                    postList.add(postParse(row, link));
+                    postList.add(postParse(row));
                 });
             } catch (IOException e) {
                 throw new IllegalArgumentException();
@@ -51,12 +51,12 @@ public class HabrCareerParse implements Parse {
         return postList;
     }
 
-    private Post postParse(Element e, String link) {
-        return new Post(
-                e.select(".vacancy-card__title").first().text(),
-                String.format("%s%s", SOURCE_LINK, e.select(".vacancy-card_inner").first().child(0).attr("href")),
-                retrieveDescription(link),
-                dateTimeParser.parse(e.select(".vacancy-card__date").first().child(0).attr("datetime"))
-        );
+    private Post postParse(Element e) {
+        Post post = new Post();
+        post.setTitle(e.select(".vacancy-card__title").first().text());
+        post.setDescription(retrieveDescription(String.format("%s%s", SOURCE_LINK, e.select(".vacancy-card__title").first().child(0).attr("href"))));
+        post.setLink(String.format("%s%s", SOURCE_LINK, e.select(".vacancy-card__title").first().child(0).attr("href")));
+        post.setCreated(dateTimeParser.parse(e.select(".vacancy-card__date").first().child(0).attr("datetime")));
+        return post;
     }
 }
